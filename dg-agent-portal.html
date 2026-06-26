@@ -835,7 +835,7 @@ body{
   <div class="folder-body">
 
     <!-- ══ COVER ══ -->
-    <div class="tab-panel active" id="panel-cover">
+    <div class="tab-panel active" id="panel-cover" style="display:block;">
 
       <!-- Sticky note — code restore -->
       <div class="sticky">
@@ -988,7 +988,7 @@ body{
     </div><!-- panel-cover -->
 
     <!-- ══ AGENT FILE ══ -->
-    <div class="tab-panel" id="panel-agent">
+    <div class="tab-panel" id="panel-agent" style="display:none;">
 
       <!-- Code gate -->
       <div id="af-gate">
@@ -1137,7 +1137,7 @@ body{
       </div><!-- af-content -->
     </div><!-- panel-agent -->
     <!-- ══ COVER IDs ══ -->
-    <div class="tab-panel" id="panel-ids">
+    <div class="tab-panel" id="panel-ids" style="display:none;">
       <div class="soon">
         <div class="soon-title">Cover ID Creator</div>
         <div class="soon-sub">Coming in Stage 3.</div>
@@ -1166,8 +1166,15 @@ function clearPersistedAgent() {
 const TABS = ['cover','agent','ids'];
 function switchTab(tab) {
   TABS.forEach(t => {
-    document.getElementById('tw-'+t).className = 'tw ' + (t===tab?'active':'inactive');
-    document.getElementById('panel-'+t).classList.toggle('active', t===tab);
+    const tw = document.getElementById('tw-'+t);
+    const panel = document.getElementById('panel-'+t);
+    if (t === tab) {
+      tw.className = 'tw active';
+      panel.style.display = 'block';
+    } else {
+      tw.className = 'tw inactive';
+      panel.style.display = 'none';
+    }
   });
 }
 
